@@ -1,4 +1,8 @@
 \chapter{Le travail réalisé}
+
+%
+%
+%
 \section{État de l'existant}
 Quand je suis arrivé au laboratoire \textit{CIRDLES}, le coeur du logiciel avait déja été réalisé par John Zeringue, mon partenaire principal pendant ce stage. Il y avait déjà un tableau où l'on pouvait entrer des données, et on pouvait déja génèrer un graphique avec les ellipses d'erreurs et une des lignes Concordia\footnote{On savait pas d'ailleurs à l'époque qu'il y avait plusieurs lignes Concordia. On appelait tout simplement celle qui était dans le logiciel ``La ligne concordia''. C'est bien plus tard dans le projet que l'on a découvert qu'il y en avait plusieurs.}.
 
@@ -13,8 +17,14 @@ Le moment où je suis arrivé coincide avec le moment où le Docteur Bowring nou
 Après avoir passé deux jours à me renseigner sur la géochronologie en lisant une publication du Docteur Bowring ou encore en regardant un DVD sur le sujet, %Cette phrase mérite peut-être sa propre section. Ou elle l'aura dans la quatrieme partie.
 j'ai commencé avec John à implémenter ce cas d'utilisation.
 
+%
+%
+%
 \section{L'implementation du cas d'utilisation}
 Il n'y a avait pas beaucoup de travail pour adapter le logiciel au cas d'utilisation. Pendant que John s'est occupé de l'import de données depuis \textit{Excel}, j'ai créé le \textit{ColumnSelectorView}.
+
+%
+%
 \subsection{Le \textit{ColumnSelectorView}}
 Dans la version d'alors du logiciel, le tableau n'avait que cinq colonnes, une pour chaque variables dont nous avions besoin pour tracer les ellipses d'erreurs. Nous avons décidé de permettre aux utilisateurs d'insérer autant de colonnes qu'ils souhaitaient depuis leur feuille de calcul Excel. Cela demandait cependant une étape supplémentaire : lier les colonnes aux variables. C'est exactement le travail du \textit{ColumnSelectorView}. 
 
