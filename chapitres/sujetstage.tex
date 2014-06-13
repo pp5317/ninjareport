@@ -1,5 +1,6 @@
 \chapter{Le sujet du stage}
 \section{Géochronologie} %"Un peu de Géochronologie..." ?
+%TODO : Parler du mass spectrometer!
 Le carbon 14 est une isotope populairement connu comme permetant de dater un objet. Il n'est pas seul. L'uranium et le plomb permettent aussi, dans des conditions particulières, de dater une couche du globe terrestre.
 
 Quand un volcan entre en éruption, en plus de la lave expulsé de son cratère, celui-ci crache aussi des \textit{zircons}. Un zircon est un crystal qui, lorsqu'il est créé, ne comporte que de l'uranium. Il est important de noter que ces cristaux sont des capsules hermétiques : rien n'en sortira et n'y rentrera. Ces zircons atterissent dans la lave et se retrouve emprisonnés. 
@@ -18,12 +19,35 @@ Il remplace un autre logiciel nommé \textit{Isotop}.
 \subsection{Les ellipses d'erreurs}
 Une ellipse représentée sur ce shema montre la relation entre deux ratios entre des isotopes de plomb et d'uranium. Un isotope est pour faire simple, une déclinaison d'un élément chimique.\\
 
-Si l'on arrivait à mesurer absolument ces ratios, ces ellipses ne seraient que des points. Mais, en physique, la precision absolue n'existe pas. Prenez une règle et mesurez le côté d'une table dix fois au millimetre près. Vous n'obtiendrez jamais la même mesure. Vous pouvez par contre, grâces aux statistiques, determiner une fourchette dans laquelle se trouve la vrai longueur de la table. On fait pareil pour les ratios. On détermine pour les deux une zones dans lesquelles leurs valeurs doit se trouver. Le mélange de ces deux zones, prenant en compte la correlation des deux ratios donne l'ellipse.
+Si l'on arrivait à mesurer absolument ces ratios, ces ellipses ne seraient que des points. Mais, en physique, la precision absolue n'existe pas. Prenez une règle et mesurez le côté d'une table dix fois au millimetre près. Vous n'obtiendrez jamais la même mesure. Vous pouvez par contre, grâces aux statistiques, determiner une fourchette dans laquelle se trouve la vrai longueur de la table. On fait pareil pour les ratios. On détermine pour les deux une zones dans lesquelles leurs valeurs doit se trouver. Le mélange de ces deux zones, prenant en compte la correlation des deux ratios donne l'ellipse. Les chercheurs se servent donc de ce shema pour étudier l'inexactitude des mesures du spectromètre de masse.
 
-Puisque les scientifiques font ces mesures sur plusieurs zircons pour une seule couche terrestre, ils doivent pouvoir mettre toutes ces mesures sur le même schema.
+Puisque les scientifiques font ces mesures sur plusieurs zircons pour une seule couche terrestre, ils doivent pouvoir mettre toutes ces mesures sur le même schema, d'où la présence de multiples éllipses.
 
-%--------------INSERER ICI GRAPHIQUE AVEC DES CARRÉS. DON'T FORGET--------------
-
-
+La ligne qui traverse le shema est une ligne de temps. C'est par rapport à elle que les chercheurs déterminent l'âge des différents ratios présents sur le schema. Il en existe de plusieurs type. On appelle ces lignes des lignes de Wetherill.
 
 \subsection{Remplacer \textit{Isotop}}
+Après trentes années de bon et loyaux services à la communauté scientifique, %find the name of the Fellah
+a décidé de discontinuer le développement d'\textit{Isoplot}, le plug-in Excel utilisé par les géochronologistes pour tracer des schémas depuis très longtemps.
+
+Ce plug-in était devenu encombrant pour les géochronologiste depuis quelques années pour les raisons suivantes :
+%VERIFIER CES RAISONS
+\begin{itemize}
+\item Il ne fonctionne correctement que sur les versions 97 et 2003 de la suite \textit{Office}. Une déclinaison du plug-in avait été réalisée pour des versions plus récentes mais elle est plus lente et supporte moins de fonctions. Cela force les laboratoire à rester sur des vieux PC et de vieux systèmes d'exploitation (Windows XP) qui peuvent avoir des failles.
+\item Il ne génère des schémas que dans une feuille Excel et ne supporte pas l'export vers des logicels de traitement vectoriel. Les géochronologistes ont besoin de cette fonctionnalité pour integrer les schémas dans leur papier ou leur présentations.
+\item Ésthetiquement parlant, les schémas produits ne sont pas très réussis
+\item C'est un plug-in Excel, écrit en \textit{Visual Basic}, un vieux langage de programation plus très utilisé : Il n'est pas possible de l'intégrer dans une autre solution. De plus, le code n'est pas libre, ce qui rend la continuation du travail impossible.
+\end{itemize}
+
+La communauté était donc avide de remplacement pour ce vieux logiciel. Le Docteur Bowring voulait mettre son laboratoire au travail sur la génération suivante de traceurs. Encore fallait qu'il trouve des clients directement interessés. Ce n'est qu'en se faisant endosser par des collègues chercheurs qu'il pourrait avoir des fonds de la part de la \textit{National Science Fundation}.
+
+C'est alors ... c'est alors qu'un géochronologiste australien, Keith Sircombe lui à envoyé un cas d'utilisation précis à réaliser. Le docteur Bowring nous a mis John Zeringue et moi immédiatement au travail sur l'implementation de ce cas d'utilisateur. Si l'on arrivait à convaincre Sircombe, nous aurions de fond.
+
+\subsection{Au delà d'\textit{Isotop}, la création d'un outil durable}
+Les projets du Docteur Bowring ne s'arretent cependant pas au simple remplacement d'\textit{Isotop}. Il veut créer un outil de tracé durable pour un grand nombre de schéma, et utilisable dans un grand nombre de cas d'utilisation.
+
+Afin de le rendre durable, plusieurs choix ont été fait. 
+\begin{itemize}
+\item Un langage majeur et stable, Java, a été choisit pour le développement du logiciel.
+\item Ce projet est pensé non seulement dans l'optique de faire un logiciel, mais aussi de créer une librairie de tracé, réutilisable dans n'importe quel projet, notamment \textit{U\_Pb\_Redux}, l'autre logiciel du Docteur Bowring.
+\item Le projet sera libre et conduit par les demandes et les besoins de la communauté de géochronologistes
+\end{itemize}
