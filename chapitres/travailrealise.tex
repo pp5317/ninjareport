@@ -43,3 +43,139 @@ Nous utilisons dans le projet une librairie appelée \textit{ControlsFX}. Elle a
 John a tranformé ma classe qui était auparavant un simple élément affichable par \textit{JavaFX} en boite de dialogue de JavaFX. Elle était dorénavant mieux integrée stylistiquement à l'interface de l'application, et surtout, elle enlevait le \textit{listener} du tableau, et donnait à la logique de génération de tableau sa propre classe : une action. Bien plus propre.
 
 Aujourd'hui cette Action est toujours une classe gigogne du \textit{ColumnSelectorView}, ce qui est selon toute l'équipe une place non idéale. Il faudra bientôt que l'on déplace toutes nos actions dans un package qui leur est dédié.
+
+%
+%
+\subsection{Completion du convertisseur SVG}
+Il ne restait alors plus qu'une seule tâche avant que l'implémentation du cas d'utilisation soit terminée : La conversion du graphique en un fichier SVG.
+
+\begin{center}
+Le SVG est un format graphique vectoriel. Un fichier au format SVG contient la définitions de diverse formes. Ces défintion comportent entre autres la positions de la position de la forme, la couleur de son tracé et de son remplissage, la largeur de son tracé \ldots.
+\end{center}
+
+\begin{center}
+Un noeud (\textit{Node}) dans \textit{JavaFX} est la classe de base de n'importe quel élément affichable. La plupart du temps, on utilise des noeuds composés d'autre noeuds. Un simple bouton, par exemple, contient au moins un rectangle et un label\footnote{Nom d'un texte affiché à l'écran dans le jargon informatique}.
+\end{center}
+
+\begin{center}
+Une scène (\textit{Scene}) est un ensemble de noeuds.
+\end{center}
+
+J'ai repris en charge l'écriture d'un convertisseur que John avait commencé à écrire. Ce convertisseur est conçu pour pouvoir transformer n'importe quel noeud en SVG. Pour cela il parcours tous les noeuds composés récursivement\footnote{La récursivité est un concept de l'informatique qui désigne la répétition d'une action entrainée par cette même action. Ici, l'action serait ``Parcourir les enfants''. Quand je \emph{parcours les enfants}, si je trouve un enfants qui en a d'autres, je \emph{parcours ses enfants}.}, et converti les noeuds de bases en éléments SVG. Nous nous en servons sur le noeud du graphique.
+
+Avant que je travail dessus, voici comme le graphiques étaient rendus :
+%----------------Image du rendu avant--------------
+
+Le travail que j'ai du effectuer pour ce convertisseur est principalement un travail d'investigation. Il fallait que je trouve où et comment JavaFX définit les options grahiques des noeuds qu'il utilise au moment de rendre les noeuds.
+
+Pour cela, j'ai tout d'abord regardé comment le noeud du graphique était composé. J'ai extrait la hierarchie des enfants du noeud du graphique :
+
+\begin{verbatim}
+ConcordiaChart@b721ec6[styleClass=chart]
+   Label@58eeaa1f[styleClass=label chart-title]''
+      Text[text="", x=0.0, y=0.0, alignment=LEFT, origin]
+   Chart$1@5109fabb[styleClass=chart-content]
+      Region@3078127b[styleClass=chart-plot-background]
+      XYChart$1@206ec019
+          Path[elements=[], fill=null, fillRule=NON_ZERO]
+          Path[elements=[MoveTo[x=100.0, y=10.0], LineTo[x=1 
+          Path[elements=[MoveTo[x=297.5, y=10.0], LineTo[x=2
+          Path[elements=[MoveTo[x=100.0, y=646.5], LineTo[x 
+          Line[startX=0.0, startY=0.0, endX=0.0, endY=0.0, s 
+          Line[startX=0.0, startY=0.0, endX=0.0, endY=0.0, s
+          Group@5867eb04[styleClass=plot-content]
+              Group@789d6eba
+                  Path[elements=[MoveTo[x=0.0, y=-57194.0], LineTo[x Invisible
+              Group@400b7196[styleClass=error-ellipse]
+                  Path[elements=[MoveTo[x=1023.0, y=62.0], CubicCurv
+              Group@bddd852[styleClass=error-ellipse]
+                  Path[elements=[MoveTo[x=798.0, y=206.0], CubicCurv
+                  Circle[centerX=775.0, centerY=221.0, radius=3.0, f
+              Group@27c9ed47[styleClass=error-ellipse]
+                  Path[elements=[MoveTo[x=604.0, y=481.0], CubicCurv
+                  Circle[centerX=583.0, centerY=497.0, radius=3.0, f
+              Group@5c612db6[styleClass=error-ellipse]
+                  Path[elements=[MoveTo[x=103.0, y=598.0], CubicCurv
+                  Circle[centerX=83.0, centerY=615.0, radius=3.0, fi
+              Group@1e4ce279[styleClass=error-ellipse]
+                  Path[elements=[MoveTo[x=810.0, y=538.0], CubicCurv
+                  Circle[centerX=789.0, centerY=557.0, radius=3.0, f
+              Group@5eec36db[styleClass=error-ellipse]
+                  Path[elements=[MoveTo[x=433.0, y=339.0], CubicCurv
+                  Circle[centerX=411.0, centerY=352.0, radius=3.0, f
+      NumberAxis@2b5f1854[styleClass=axis] Horizontal 
+         Label@29a340ae[styleClass=label axis-label]'xxxPb/
+              Text[text="xxxPb/xxxU", x=0.0, y=0.0, alignment=LE 207pb/235u
+          Path[elements=[MoveTo[x=0.0, y=0.0], LineTo[x=0.0, 
+          Path[elements=[MoveTo[x=40.0, y=1.0], LineTo[x=40. 
+          Text[text="0.0720000", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0720500", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0721000", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0721500", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0722000", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0722500", x=0.0, y=0.0, alignment=LEF
+      NumberAxis@2650091e[styleClass=axis]
+          Label@2ea49c54[styleClass=label axis-label]'xxxPb/
+              Text[text="xxxPb/xxxU", x=0.0, y=0.0, alignment=LE Invisible
+          Path[elements=[MoveTo[x=82.0, y=636.0], LineTo[x=9
+          Path[elements=[MoveTo[x=85.0, y=679.0], LineTo[x=8
+          Text[text="0.0000800", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0001000", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0001200", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0001400", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0001600", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0001800", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0002000", x=0.0, y=0.0, alignment=LEF
+          Text[text="0.0002200", x=0.0, y=0.0, alignment=LEF
+      Rectangle[x=0.0, y=0.0, width=0.0, height=0.0, fil Empty
+\end{verbatim}
+J'ai cherché à savoir, en comparant avec les éléments du SVG déjà génèré par le code existant à quel élément graphique correspondait chacuns de ces éléments. Pour une meilleurs de ce qui suit, une capture d'écran d'un graphique a été placé après cette liste. On voit donc que le \textit{ConcordiaChart} est composé de :
+\begin{itemize}
+\item Un objet \textit{Label} : le titre du graphique
+\item Un objet \textit{Chart} avec un objet \textit{XYChart} contenant :
+  \begin{itemize}
+  \item Des objets \textit{Path} : Les lignes étendant les graduations des axes
+  \item Un objet \textit{Group} : Les objets affichés sur le graphique
+    \begin{itemize}
+    \item La ligne de temps est l'objet \textit{Path} dans le second \textit{Group}
+    \item Les autres \textit{Group} contiennent un \textit{Path}, l'Ellipse, et un \textit{Circle}, le point au milieu de l'ellipse.
+    \end{itemize}
+  \end{itemize}
+\item Deux objets \textit{Axis}, contenant chacun :
+  \begin{itemize}
+  \item Un \textit{Label} : la légende de l'axe
+  \item Deux éléments \textit{Path} : Les grandes et petites marques de graduation
+  \item Des éléments \textit{Text} : Les textes des graduations
+  \end{itemize}
+\end{itemize}
+%Image du graphique sous JavaFX
+
+J'ai ensuite été chercher dans le moteur de rendu de \textit{JavaFX} la logique qui rend une scene à l'écran. Mon plan (diabolique s'il en est), était de voir où cette logique récupère les options graphiques des objets qu'elle doit dessiner. Si mon plan a failli, me coutant quelques jours, j'ai néanmoins appris énormément sur la façon dont \textit{JavaFX} fonctionne. 
+
+Pour résumer, le code de JavaFX est separé en deux :
+\begin{enumerate}
+\item La partie publique est celle que l'on utilise pour construire une scene, et plus génénalement pour intéragir avec la librairie. Elle contient aussi les \textit{Property}, dont je parlerais plus tard. Elle est sous le package %TODO noter le package avec Verbatim
+\item La partie privée (joyeusement fouillie et peu commentée) a différents rôles:%TODO noter le package avec verbatim
+  \begin{enumerate}	
+  \item Rendre des scenes (Moteur de rendu \textit{Prism}, sur lequel je me suis particulierement penché)
+  \item Unifier l'interaction avec les systèmes de fenêtrage des différents OS avec lesquels \textit{JavaFX} est compatible. (Module \textit{Glassfish})
+  \item Rendre différents type de médias
+  \item Rendu du HTML complet, (Moteur basé sur \textit{Webkit})
+  \item Marcher sur plusieurs threads
+  \end{enumerate}
+\end{enumerate}
+
+Après la faillite de mon premier plan, j'ai procédé plus simplement. Je suis revenu aux objets de l'API publique, ceux que nous manipulons quand nous créons une scène et ait cherché les différentes options graphique en leur seins. J'ai reussi à trouver et à orienter correctement le nom des axes et à repositionner ceux-ci, j'ai re-aligné les graduations, repositionné et affiché des lignes et des textes dans le graph.
+
+%
+%
+%
+\section{Réponse aux attente de la communauté GitHub}
+Le module SVG était fini. Le cas d'utilisation était implémenté. Nous étions près à montrer le fruit de notre travail aux chercheurs Australiens, ce que nous avons fait le Jeudi% verifier que c'est  bien un jeudi 
+21 mai par visioconférence. Ils étaient enchantés du prototype.
+
+Le docteur Bowring a envoyé un lien vers le dépot GitHub du projet, et une petite mais active communauté s'est formée autour du projet. Ses membres nous envoient encore à ce jours des rapports de bug, des suggestions de fonctions.
+
+Cela a bien sur beaucoup changer la dynamique de travail. Nos journées étaient à présent partagées entre réponses à la communauté, corrections rapides de bugs et developpement de fonctions plus complexes. Nous avons appris à penser à court et long termes.
+
+Je vais à présent parler des deux dernières fonctions complexes que j'ai conçu et codé les semaines restantes.
