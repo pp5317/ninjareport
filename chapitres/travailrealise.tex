@@ -316,4 +316,4 @@ Le developpement de ces panneaux a été rendu facile par le système de \textit
 
 Les \textit{Property} sont utilisées partout dans JavaFX. N'importe quelle valeur, de la couleur d'une bordure à la largeur d'une fenêtre en est une. Tout ce que j'ai eu à faire est simplement lier les valeurs de mes formulaires aux propriétés auquelles elles étaient liées. 
 
-Fait interessant à propos de ces graduations, 
+Fait qui se révèlera par la suite interessant à propos de ces propriétés cibles : dans notre programme nous savons où les trouver. Par exemple, le nom de l'axe se trouve dans la classe de l'axe. Mais notre programme est aussi une librairie integrable dans un programme plus grand. Et j'ai pensé que dans ces programmes les propriétés à paramètrées seraient a un endroit inconnu. J'avais donc conçu une interface que les panels utilisaient pour trouver les propriétés au lieu d'y acceder directement. Cette interface a été jugée trop peu utile et j'ai du la retirer.
