@@ -17,3 +17,28 @@ Voyons comment Git a modelé notre façon de travailler en équipe.
 
 %%Mentionner GitHub Pages (parce que serieux, quoi de mieux ?)
 
+\section{L'organisation}
+
+\subsection{L'organisation de l'équipe}
+L'integralité de notre travail est organisé avec \textit{Gitub}. Notre code source y est dans un dépot, et c'est grâce là que nous fusionnons nos différents travaux. Nos listes de tâches évolue dynaniquement sur l'\textit{issue tracker}. Une \textit{issue} est crée par fonctionnalité à implémenter ou bug à résoudre pour nous ou nos utilisateurs. On en discute entre nous ou avec les utilisateurs. Nous nous les assignons ensuite, et nous les assignons aussi à une version, version qui a une date de sortie. Une issue est ouverte quand elle requiert du travail. Elles sont fermées automatiquement quand un commit la résoud. C'est sur ce tracker que nous voyons l'avancée du travail, que nous prévoyons le futur du developpement et que l'on communique avec nos utilisateurs.
+
+J'ai aussi experimenté vers la fin de ce stage le développement à plusieurs vitesse. Le projet va bientôt commencer le developpement d'une grande librairie ce qui va sans aucun doute prendre plusieurs mois. Pendant ce temps, la réponse aux besoin urgents des utilisateurs, tels que correction de bugs et autres fonctionalités rapide à coder ne va pas s'arrêter. Nous cherchons donc un moyen d'organiser l'équipe qu'elle reste efficace sur et entre ces deux front. Il y a plusieurs façon de faire ceci et elles influent sur deux facteurs : La répartition du travail dans la journée, dans la semaine et entre les hommes. La solution que nous experimentons en ce moment est une semaine de developpement court et une semaine de recherche pour la librairie. Cela pose cenpendant des problème, notement le fait de laisser des utilisateurs sans réponse.
+
+Sur ce point j'ai fais une autre découverte que j'ai appris à gêrer (notemment grâce à un fantastique article trouvé sur Reddit)%AJOUTER UNE REFERENCE À L'ARTICLE
+: Un projet ne se fait pas à vitesse constante. Il y a des periodes, periodes de rush, où on est plongé dans le developpement d'une fonctions. C'est très agréable à court terme, on apprends beaucoup et on produit beaucoup. Mais on ne peut pas, et on ne doit surtout pas rester dans ce mode trop longtemps, d'une parce que le code produit n'est pas très glorieux, et de deux parce que l'équipe risque de s'essouffler et de produire de moins en moins, et surtout de moins en moins bien. Un autre mode est ce que l'on appelle le mode marathon. L'équipe produit, mais passe aussi du temps à côté à se relaxer, à apprendre, ou à refléchir. Et puis il y a les bien aimés jours lents, ou il ne se passe que peu de choses, et la majorité du temps est passé sur Youtube ou South Park Studio. Ah... le vendredi!
+
+Documenter et écrire des testes sur un projet n'est pas notre fort. J'ai appris pendant ce projet que malgré toute la bonne volonté que l'on peut mettre dans ces tâches au départ, on se retrouve bien souvent le nez dans le developpement de fonctions compliqués et on oublie ces apports considérables au long terme. Il s'agit vraiment de prendre l'habitude de les écrires et d'accepter que si le developpement d'une fonction est forcement ralongée, c'est pour le bien des programmes, des utilisateurs et de l'équipe. J'ai encore beaucoup de progrès à faire dans ce domaine.
+
+\subsection{Ma façon de concevoir un programme}
+
+\begin{center}Le principe KISS : Keep it simple, stupid !\end{center}
+
+Si je ne retenais qu'une seule chose de stage\footnote{Ce qui serait diqblement stupide}, ce serait que ma façon de concevoir un programme à énormement changé. Je suis arrivé aux États-Unis et ait produit au départ des fonctions comme je l'ai toujours fais. : elles répondent à un maximum de cas d'utilisations et sont très complexe. Le petit problème que j'ai appris à éviter est qu'elles répondent à des problèmes que l'équipe et le programme n'ont pas encore, et n'auront peut-être jamais. Et surtout, elles rajoutent trop de complexité au code. J'ai du bien souvent simplifier ma façon de penser pour que le code ne devienne pas une jungle.
+
+J'ai donc cessé de produire des codes à interfaces qui produisait trop pour le futur, et ait commencé à me demander \emph{pourquoi je concevais mon code comme ça}, \emph{à qui cela allait profiter}, et : \emph{textbf{``N'y a t-il pas un moyen de le faire plus simplement ??''}}.
+
+\begin{quote}
+``Perfect is the ennemy of good'' - Jim Bowring
+\end{quote}
+
+Voilà un autre principe que j'ai au premier abord détesté puis que j'ai appris à aimé tout au long de ces 13 semaines. Produire du code parfait est dur, très dur. Cela demande beaucoup de compétences, de la concentration et de la plannification. Et surtout, cela énormément de temps. La recherche de la perfection fait dépasser les deadlines, pousse à faire et à refaire et à refaire. Les developpeurs se fatiguent et les clients ne sont pas contents du retard. Foncer et ne pas se pencher sur les détails à ceci de très, très positif : on finit et on publie la fonction. C'est un soulagement pour les développeurs, les clients sont centents. Par contre, cela apporte de la dette technique\footnote{Terme recemment inventé qui désigne le degré de mauvais code dans le projet}. Comme toute dette, il faut l'emprunter intelligement, en pensant à la façon dont on va la rembourser, pour éviter d'avoir un code trop gangrainé.
