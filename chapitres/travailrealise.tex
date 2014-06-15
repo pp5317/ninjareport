@@ -4,33 +4,33 @@
 %
 %
 \section{État de l'existant}
-Quand je suis arrivé au laboratoire \textit{CIRDLES}, le coeur du logiciel avait déja été réalisé par John Zeringue, mon partenaire principal pendant ce stage. Il y avait déjà un tableau où l'on pouvait entrer des données, et on pouvait déja génèrer un graphique avec les ellipses d'erreurs et une des lignes Concordia\footnote{On savait pas d'ailleurs à l'époque qu'il y avait plusieurs lignes Concordia. On appelait tout simplement celle qui était dans le logiciel ``La ligne concordia''. C'est bien plus tard dans le projet que l'on a découvert qu'il y en avait plusieurs.}.
+Quand je suis arrivé au laboratoire \textit{CIRDLES}, le cœur du logiciel avait déja été réalisé par John Zeringue, mon partenaire principal pendant ce stage. Il y avait déjà un tableau où l'on pouvait entrer des données, et on pouvait déja génèrer un graphique avec les ellipses d'erreurs et une des lignes Concordia\footnote{On savait pas d'ailleurs à l'époque qu'il y avait plusieurs lignes Concordia. On appelait tout simplement celle qui était dans le logiciel ``La Ligne Concordia''. Bien plus tard dans le projet nous avons découvert qu'il y en avait plusieurs.}.
 
-Le moment où je suis arrivé coincide avec le moment où le Docteur Bowring nous a donné le cas d'utilisation primaire du chercheur Australien à implémenter. Le cas d'utilisation peut se résumer aux étapes suivantes :
+Le moment où je suis arrivé coïncide avec le moment où le Docteur Bowring nous a donné le cas d'utilisation primaire du chercheur australien à implémenter. Le cas d'utilisation peut se résumer aux étapes suivantes :
 \begin{enumerate}
-\item Le geochronologiste a des données dans une feuille Excel qui représente des ratios et leur inexactitude. Il les copie.
-\item Il entre dans notre logiciel et colle les donnée dans un tableau similaire.
-\item Il demande à génèrer le schema, le logiciel le lui montre.
+\item Le géochronologiste a des données dans une feuille Excel qui représente des ratios et leur inexactitude. Il les copie.
+\item Il entre dans notre logiciel et colle les données dans un tableau similaire.
+\item Il demande à générer le schema, le logiciel le lui montre.
 \item Il a ensuite la possibilité de l'exporter au format SVG
 \end{enumerate}
 
-Après avoir passé deux jours à me renseigner sur la géochronologie en lisant une publication du Docteur Bowring ou encore en regardant un DVD sur le sujet, %Cette phrase mérite peut-être sa propre section. Ou elle l'aura dans la quatrieme partie.
-j'ai commencé avec John à implémenter ce cas d'utilisation.
+Après avoir passé deux jours à me renseigner sur la géochronologie en lisant une publication du Docteur Bowring ou encore en regardant un DVD sur le sujet, %Cette phrase mérite peut-être sa propre section. Ou elle l'aura dans la quatrième partie.
+J'ai commencé avec John à implémenter ce cas d'utilisation.
 
 %
 %
 %
-\section{L'implementation du cas d'utilisation}
+\section{L'implémentation du cas d'utilisation}
 Il n'y a avait pas beaucoup de travail pour adapter le logiciel au cas d'utilisation. Pendant que John s'est occupé de l'import de données depuis \textit{Excel}, j'ai créé le \textit{ColumnSelectorView}.
 
 %
 %
 \subsection{Le \textit{ColumnSelectorView}}
-Dans la version d'alors du logiciel, le tableau n'avait que cinq colonnes, une pour chaque variables dont nous avions besoin pour tracer les ellipses d'erreurs. Nous avons décidé de permettre aux utilisateurs d'insérer autant de colonnes qu'ils souhaitaient depuis leur feuille de calcul Excel. Cela demandait cependant une étape supplémentaire : lier les colonnes aux variables. C'est exactement le travail du \textit{ColumnSelectorView}. 
+Dans la version d'alors du logiciel, le tableau n'avait que cinq colonnes, une pour chaque variable dont nous avions besoin pour tracer les ellipses d'erreurs. Nous avons décidé de permettre aux utilisateurs d'insérer autant de colonnes qu'ils souhaitaient depuis leur feuille de calcul Excel. Cela demandait cependant une étape supplémentaire : lier les colonnes aux variables. C'est exactement le travail du \textit{ColumnSelectorView}. 
 
 %--------------INSERER ICI UNE CAPTURE D'ECRAN DU COLONNESELECTORVIEW. DON'T FORGET--------------
 
-D'un point de vue graphique cette interface n'est pas très interessante. La façon dont je l'ai implementé sera par contre très interessante pour le chapitre quatre, qui portera sur \textit{ce que j'ai appris durant ce stage}. La première monture de cette classe ne comportait pas la logique pour de la génération du schema. Ma conception de cette classe était un petit utilitaire qui ne sert qu'à choisir les champs, la génération du schema devait se faire autre part. Cette classe ne contenait qu'un modele de \textit{listener}\footnote{Un listener est une interface (au sens programatique du terme) qui réagit aux signaux d'un objet en particulier.} qui contenait une méthode que l'on appelait pour gênerer le schema. Ce listener était implémenté dans la classe qui gêrait le tableau. Pour moi, cela fait sens que la génération d'un graphique avec les données d'un tableau soit ordonnées par celui-ci. Ce n'est pas faux en soit, mis il y a mieux...
+D'un point de vue graphique cette interface n'est pas très intéressante. La façon dont je l'ai implémenté sera par contre très intéressante pour le chapitre quatre, qui portera sur \textit{ce que j'ai appris durant ce stage}. La première monture de cette classe ne comportait pas la logique pour de la génération du schéma. Ma conception de cette classe était un petit utilitaire qui ne sert qu'à choisir les champs, la génération du schéma devait se faire autre part. Cette classe ne contenait qu'un modèle de \textit{listener}\footnote{Un listener est une interface (au sens programatique du terme) qui réagit aux signaux d'un objet en particulier.} qui contenait une méthode que l'on appelait pour générer le schéma. Ce listener était implémenté dans la classe qui gêrait le tableau. Pour moi, cela fait sens que la génération d'un graphique avec les données d'un tableau soit ordonnées par celui-ci. Ce n'est pas faux en soit, mais il y a mieux...
 
 %--------------INSERER ICI LE CODE DE L'INTERFACE YO--------------
 
@@ -40,7 +40,7 @@ Quinze jours plus tard, le code de cette classe avait drastiquement changé. Je 
 
 Nous utilisons dans le projet une librairie appelée \textit{ControlsFX}. Elle ajoute des éléments d'interface graphique qui ne sont pas dans la librairie originale, ainsi que la notion d'\textbf{Actions}. Une Action est une classe qui \textit{fait quelque chose en réaction à une demande de l'utilisateur}. Un de ses avantages est qu'elle est automatiquement transformée en élément d'interface par \textit{ControlsFX}. Exemple : une boite de dialogue a une série d'actions possibles en réaction à son affichage qu'elle tranforme en boutons.
 
-John a tranformé ma classe qui était auparavant un simple élément affichable par \textit{JavaFX} en boite de dialogue de JavaFX. Elle était dorénavant mieux intégrée stylistiquement à l'interface de l'application, et surtout, elle enlevait le \textit{listener} du tableau, et donnait à la logique de génération de tableau sa propre classe : une action. Bien plus propre.
+John a transformé ma classe qui était auparavant un simple élément affichable par \textit{JavaFX} en boite de dialogue de JavaFX. Elle était dorénavant mieux intégrée stylistiquement à l'interface de l'application, et surtout, elle enlevait le \textit{listener} du tableau, et donnait à la logique de génération de tableau sa propre classe : une action. Bien plus propre.
 
 Aujourd'hui cette Action est toujours une classe gigogne du \textit{ColumnSelectorView}, ce qui est selon toute l'équipe une place non-idéale. Il faudra bientôt que l'on déplace toutes nos actions dans un package qui leur est dédié.
 
@@ -165,7 +165,7 @@ Pour résumer, le code de JavaFX est separé en deux :
   \end{enumerate}
 \end{enumerate}
 
-Après la faillite de mon premier plan, j'ai procédé plus simplement. Je suis revenu aux objets de l'API publique, ceux que nous manipulons quand nous créons une scène et ait cherché les différentes options graphique en leur seins. J'ai reussi à trouver et à orienter correctement le nom des axes et à repositionner ceux-ci, j'ai re-aligné les graduations, repositionné et affiché des lignes et des textes dans le graph.
+Après la faillite de mon premier plan, j'ai procédé plus simplement. Je suis revenu aux objets de l'API publique, ceux que nous manipulons quand nous créons une scène et ait cherché les différentes options graphique en leur sein. J'ai reussi à trouver et à orienter correctement le nom des axes et à repositionner ceux-ci, j'ai re-aligné les graduations, repositionné et affiché des lignes et des textes dans le graph.
 
 %
 %
