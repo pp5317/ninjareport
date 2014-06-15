@@ -1,4 +1,4 @@
-\chapter{Le travail réalisé}
+﻿\chapter{Le travail réalisé}
 
 %
 %
@@ -40,35 +40,35 @@ Quinze jours plus tard, le code de cette classe avait drastiquement changé. Je 
 
 Nous utilisons dans le projet une librairie appelée \textit{ControlsFX}. Elle ajoute des éléments d'interface graphique qui ne sont pas dans la librairie originale, ainsi que la notion d'\textbf{Actions}. Une Action est une classe qui \textit{fait quelque chose en réaction à une demande de l'utilisateur}. Un de ses avantages est qu'elle est automatiquement transformée en élément d'interface par \textit{ControlsFX}. Exemple : une boite de dialogue a une série d'actions possibles en réaction à son affichage qu'elle tranforme en boutons.
 
-John a tranformé ma classe qui était auparavant un simple élément affichable par \textit{JavaFX} en boite de dialogue de JavaFX. Elle était dorénavant mieux integrée stylistiquement à l'interface de l'application, et surtout, elle enlevait le \textit{listener} du tableau, et donnait à la logique de génération de tableau sa propre classe : une action. Bien plus propre.
+John a tranformé ma classe qui était auparavant un simple élément affichable par \textit{JavaFX} en boite de dialogue de JavaFX. Elle était dorénavant mieux intégrée stylistiquement à l'interface de l'application, et surtout, elle enlevait le \textit{listener} du tableau, et donnait à la logique de génération de tableau sa propre classe : une action. Bien plus propre.
 
-Aujourd'hui cette Action est toujours une classe gigogne du \textit{ColumnSelectorView}, ce qui est selon toute l'équipe une place non idéale. Il faudra bientôt que l'on déplace toutes nos actions dans un package qui leur est dédié.
+Aujourd'hui cette Action est toujours une classe gigogne du \textit{ColumnSelectorView}, ce qui est selon toute l'équipe une place non-idéale. Il faudra bientôt que l'on déplace toutes nos actions dans un package qui leur est dédié.
 
 %
 %
-\subsection{Completion du convertisseur SVG}
+\subsection{Complétion du convertisseur SVG}
 Il ne restait alors plus qu'une seule tâche avant que l'implémentation du cas d'utilisation soit terminée : La conversion du graphique en un fichier SVG.
 
 \begin{center}
-Le SVG est un format graphique vectoriel. Un fichier au format SVG contient la définitions de diverse formes. Ces défintion comportent entre autres la positions de la position de la forme, la couleur de son tracé et de son remplissage, la largeur de son tracé \ldots.
+Le SVG est un format graphique vectoriel. Un fichier au format SVG contient la définitions de diverses formes. Ces défintions comportent entre autres la positions de la position de la forme, la couleur de son tracé et de son remplissage, la largeur de son tracé \ldots.
 \end{center}
 
 \begin{center}
-Un noeud (\textit{Node}) dans \textit{JavaFX} est la classe de base de n'importe quel élément affichable. La plupart du temps, on utilise des noeuds composés d'autre noeuds. Un simple bouton, par exemple, contient au moins un rectangle et un label\footnote{Nom d'un texte affiché à l'écran dans le jargon informatique}.
+Un nœud (\textit{Node}) dans \textit{JavaFX} est la classe de base de n'importe quel élément affichable. La plupart du temps, on utilise des nœuds composés d'autres nœuds. Un simple bouton, par exemple, contient au moins un rectangle et un label\footnote{Nom d'un texte affiché à l'écran dans le jargon informatique}.
 \end{center}
 
 \begin{center}
-Une scène (\textit{Scene}) est un ensemble de noeuds.
+Une scène (\textit{Scene}) est un ensemble de nœuds.
 \end{center}
 
-J'ai repris en charge l'écriture d'un convertisseur que John avait commencé à écrire. Ce convertisseur est conçu pour pouvoir transformer n'importe quel noeud en SVG. Pour cela il parcours tous les noeuds composés récursivement\footnote{La récursivité est un concept de l'informatique qui désigne la répétition d'une action entrainée par cette même action. Ici, l'action serait ``Parcourir les enfants''. Quand je \emph{parcours les enfants}, si je trouve un enfants qui en a d'autres, je \emph{parcours ses enfants}.}, et converti les noeuds de bases en éléments SVG. Nous nous en servons sur le noeud du graphique.
+J'ai repris en charge l'écriture d'un convertisseur que John avait commencé à écrire. Ce convertisseur est conçu pour pouvoir transformer n'importe quel nœud en SVG. Pour cela il parcours tous les nœuds composés récursivement\footnote{La récursivité est un concept de l'informatique qui désigne la répétition d'une action entrainée par cette même action. Ici, l'action serait ``Parcourir les enfants''. Quand je \emph{parcours les enfants}, si je trouve un enfants qui en a d'autres, je \emph{parcours ses enfants}.}, et converti les nœuds de bases en éléments SVG. Nous nous en servons sur le nœud du graphique.
 
 Avant que je travail dessus, voici comme le graphiques étaient rendus :
 %----------------Image du rendu avant--------------
 
-Le travail que j'ai du effectuer pour ce convertisseur est principalement un travail d'investigation. Il fallait que je trouve où et comment JavaFX définit les options grahiques des noeuds qu'il utilise au moment de rendre les noeuds.
+Le travail que j'ai du effectuer pour ce convertisseur est principalement un travail d'investigation. Il fallait que je trouve où et comment JavaFX définit les options graphiques des nœuds qu'il utilise au moment de rendre les nœuds 
 
-Pour cela, j'ai tout d'abord regardé comment le noeud du graphique était composé. J'ai extrait la hierarchie des enfants du noeud du graphique :
+Pour cela, j'ai tout d'abord regardé comment le noeud du graphique était composé. J'ai extrait la hierarchie des enfants du nœud du graphique :
 
 \begin{verbatim}
 ConcordiaChart@b721ec6[styleClass=chart]
