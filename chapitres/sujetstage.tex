@@ -32,29 +32,28 @@ Puisque les scientifiques font ces mesures sur plusieurs zircons pour une seule 
 
 La ligne qui traverse le schéma est une ligne de temps, appelée ligne de Concordia. C'est par rapport à elle que les chercheurs déterminent l'âge des différents ratios présents sur le schéma. Il en existe plusieurs types.
 
-\subsection{Remplacer \textit{Isotop}}
-Après trente années de bon et loyaux services à la communauté scientifique, Ken Ludwig a décidé de d'arrêter le développement d'\textit{Isoplot}, le plug-in Excel utilisé par les géochronologistes pour tracer des schémas depuis très longtemps.
+\subsection{Remplacer \textit{Isoplot}}
+Après trente années de bon et loyaux services à la communauté scientifique, Ken Ludwig a décidé de d'arrêter le développement d'\textit{Isoplot}, le plug-in permettant à Excel de tracer entre autre le schema expliqué dans la section précédante.
 
-Ce plug-in était devenu encombrant pour les géochronologiste depuis quelques années pour les raisons suivantes :
-%VERIFIER CES RAISONS
+Ce plug-in était devenu encombrant pour les géochronologistes depuis quelques années pour les raisons suivantes :
+
 \begin{itemize}
-\item Il ne fonctionne correctement que sur les versions 97 et 2003 de la suite \textit{Office}. Une déclinaison du plug-in avait été réalisée pour des versions plus récentes mais elle est plus lente et supporte moins de fonctions. Cela force les laboratoire à rester sur des vieux PC et de vieux systèmes d'exploitation (Windows XP) qui peuvent avoir des failles.
+\item Il ne fonctionne correctement que sur les versions 97 et 2003 de la suite Office. Une déclinaison du plug-in a été réalisée pour des versions plus récentes mais elle est plus lente et supporte moins de fonctions. Cela force les laboratoire ayant besoin de ses services à rester sur de vieux PC et de vieux systèmes d'exploitation comme Windows XP qui ne sont plus supportés par Microsoft et donc dangereux à utiliser.
 \item Il ne génère des schémas que dans une feuille Excel et ne supporte pas l'export vers des logiciels de traitement vectoriel. Les géochronologistes ont besoin de cette fonctionnalité pour intégrer les schémas dans leur papier ou leurs présentations.
-\item Esthetiquement parlant, les schémas produits ne sont pas très réussis
-\item C'est un plug-in Excel, écrit en \textit{Visual Basic}, un vieux langage de programation plus très utilisé : Il n'est pas possible de l'intégrer dans une autre solution. De plus, le code n'est pas libre, ce qui rend la continuation du travail impossible.
+\item Esthétiquement parlant, les schémas produits ne sont pas très réussis
+\item Un plug-in Excel, écrit en \textit{Visual Basic}, un vieux langage de programation qui n'est plus très utilisé est voué à vieillir sans être mis à jour. Ce code est à usage uniquem, il n'est pas possible de l'intégrer dans une autre solution. De plus, le code n'est pas libre, ce qui rend la continuation du travail impossible.
 \end{itemize}
 
-La communauté était donc avide de remplacement pour ce vieux logiciel. Le Docteur Bowring voulait mettre son laboratoire au travail sur la génération suivante de traceurs. Encore fallait qu'il trouve des clients directement intéressés. Ce n'est qu'en se faisant endosser par des collègues chercheurs qu'il pourrait avoir des fonds de la part de la \textit{National Science Fundation}.
+La communauté était donc avide d'un remplacement pour ce vieux logiciel et le docteur Bowring voulait la lui la fournir. Encore fallait qu'il trouve des clients directement intéressés. Ce n'est qu'en se faisant endosser par des collègues chercheurs que son laboratoire pourrait avoir des fonds de la \textit{National Science Fundation}.
 
-%Reference à Pierre et le Loup peut-être inutile
-C'est alors ... c'est alors qu'un géochronologiste australien, Keith Sircombe lui à envoyé un cas d'utilisation précis à réaliser. Le docteur Bowring nous a mis John Zeringue et moi immédiatement au travail sur l'implémentation de ce cas d'utilisateur. Si l'on arrivait à convaincre Sircombe que nous pouvions faire un travail correct, nous aurions des fonds.
+C'est alors qu'un géochronologiste australien, Keith Sircombe, lui à envoyé un cas d'utilisation précis à réaliser. Le docteur Bowring nous a mis, John Zeringue et moi, immédiatement au travail sur l'implémentation de ce cas d'utilisation. Si l'on arrivait à convaincre Sircombe que nous pouvions faire un travail correct, nous aurions les fonds.
 
-\subsection{Au delà d'\textit{Isotop}, la création d'un outil durable}
-Les projets du Docteur Bowring ne s'arrtent cependant pas au simple remplacement d'\textit{Isotop}. Il veut créer un outil de tracé durable pour un grand nombre de schéma^s, et utilisable dans un grand nombre de cas.
+\subsection{Au delà d'\textit{Isoplot}, la création d'un outil durable}
+Les projets du Docteur Bowring ne s'arrêtent cependant pas au simple remplacement d'\textit{Isoplot}. Son ambition est de créer un outil de tracé durable pour un grand nombre de schémas, et utilisable dans un grand nombre de cas.
 
-Afin de le rendre durable, plusieurs choix ont été faits. 
+Afin de le rendre durable, plusieurs choix ont été faits : 
 \begin{itemize}
 \item Un langage majeur et stable, Java, a été choisi pour le développement du logiciel.
-\item Ce projet est pensé non seulement dans l'optique de faire un logiciel, mais aussi de créer une librairie de tracé, réutilisable dans n'importe quel projet, notamment \textit{U\_Pb\_Redux}, l'autre logiciel du Docteur Bowring.
+\item Ce projet est pensé non seulement dans l'optique de faire un logiciel, mais aussi de créer une librairie de tracé, réutilisable dans n'importe quel projet, notamment \textit{U\_Pb\_Redux}, le logiciel programmé par le Docteur Bowring.
 \item Le projet sera libre et conduit par les demandes et les besoins de la communauté de géochronologistes
 \end{itemize}
