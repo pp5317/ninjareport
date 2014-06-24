@@ -4,7 +4,7 @@
 %
 %
 \section{État de l'existant}
-Quand je suis arrivé au laboratoire \textit{CIRDLES}, le cœur du logiciel avait déja été réalisé par John Zeringue, mon partenaire principal pendant ce stage. Il y avait un tableau où l'on pouvait entrer des données, et on pouvait déja génèrer un graphique avec les ellipses d'erreurs et une des lignes Concordia\footnote{On savait pas d'ailleurs à l'époque qu'il y avait plusieurs lignes Concordia. On appelait tout simplement celle qui était dans le logiciel ``La Ligne Concordia''. C'est bien plus tard que nous avons découvert qu'il y en avait plusieurs.}.
+Quand je suis arrivé au laboratoire \textit{CIRDLES}, le cœur du logiciel avait déjà été réalisé par John Zeringue, mon partenaire principal pendant ce stage. Il y avait un tableau où l'on pouvait entrer des données, et on pouvait déja générer un graphique avec les ellipses d'erreurs et une des lignes Concordia\footnote{On savait pas d'ailleurs à l'époque qu'il y avait plusieurs lignes Concordia. On appelait tout simplement celle qui était dans le logiciel ``La Ligne Concordia''. C'est bien plus tard que nous avons découvert qu'il y en avait plusieurs.}.
 
 Le moment où je suis arrivé coïncide avec le moment où le Docteur Bowring nous a donné le cas d'utilisation basique du chercheur australien à implémenter. Le cas d'utilisation peut se résumer aux étapes suivantes :
 \begin{enumerate}
@@ -30,15 +30,15 @@ Dans la version d'alors du logiciel, le tableau n'avait que cinq colonnes, une p
 
 %--------------INSERER ICI UNE CAPTURE D'ECRAN DU COLONNESELECTORVIEW. DON'T FORGET--------------
 
-D'un point de vue graphique cette interface n'est pas très intéressante. La façon dont je l'ai implémenté sera par contre très intéressante pour le chapitre quatre, qui portera sur \textit{ce que j'ai appris durant ce stage}. La première mouture de cette classe ne comportait pas la logique pour de la génération du schéma. Sa conceptipon était pour moi un petit utilitaire qui ne sert qu'à choisir les champs, la génération du schéma à partir du schema devait se faire autre part. Cette classe était liéà un \textit{listener}\footnote{Un listener est une interface (au sens programatique du terme) qui réagit aux signaux d'un objet en particulier. Ici, le listener génerait le schema.} qui générait le schéma, implémenté dans la classe qui gêrait le tableau. Cela faisait sens pour moi que la génération d'un graphique avec les données d'un tableau soit ordonnée par ce même tableau. Ce n'est pas faux en soit, mais il y a mieux\ldots
+D'un point de vue graphique cette interface n'est pas très intéressante. La façon dont je l'ai implémenté sera par contre très intéressante pour le chapitre quatre, qui portera sur \textit{ce que j'ai appris durant ce stage}. La première mouture de cette classe ne comportait pas la logique pour de la génération du schéma. Sa conception était pour moi un petit utilitaire qui ne sert qu'à choisir les champs, la génération du schéma à partir du schema devait se faire autre part. Cette classe était liée à un \textit{listener}\footnote{Un listener est une interface (au sens programmatique du terme) qui réagit aux signaux d'un objet en particulier. Ici, le listener générait le schéma.} qui générait le schéma, implémenté dans la classe qui gérait le tableau. Cela faisait sens pour moi que la génération d'un graphique avec les données d'un tableau soit ordonnée par ce même tableau. Ce n'est pas faux en soit, mais il y a mieux\ldots
 
 %--------------INSERER ICI LE CODE DE L'INTERFACE YO--------------
 
 %TODO : Quinze jours est faux, trouver le bon 
 Quinze jours plus tard, John avait drastiquement changé la classe pour me faire comprendre que ma façon de concevoir était très démodée en supprimant l'interface \textit{ColumnSelectorInterfaceListener}.
-. Laissez moi vous expliquer plus en détails.
+Laissez-moi vous expliquer plus en détails.
 
-Nous utilisons dans le projet une librairie appelée \textit{ControlsFX}. Elle ajoute des éléments d'interface graphique qui ne sont pas dans la librairie originale, ainsi que la notion d'\textbf{Actions}. Une Action est un objet qui \textit{fait quelque chose en réaction à une demande de l'utilisateur}. Un de ses avantages est qu'elle est automatiquement transformée en élément d'interface par \textit{ControlsFX}. Exemple : une boite de dialogue est liée une série d'Actions que l'utilisateur peut choisir en réaction à son affichage. C'est elle qui les tranforme automatiquement en boutons.
+Nous utilisons dans le projet une librairie appelée \textit{ControlsFX}. Elle ajoute des éléments d'interface graphique qui ne sont pas dans la librairie originale, ainsi que la notion d'\textbf{Actions}. Une Action est un objet qui \textit{fait quelque chose en réaction à une demande de l'utilisateur}. Un de ses avantages est qu'elle est automatiquement transformée en élément d'interface par \textit{ControlsFX}. Exemple : une boite de dialogue est liée une série d'Actions que l'utilisateur peut choisir en réaction à son affichage. C'est elle qui les transforme automatiquement en boutons.
 
 John a transformé ma classe qui était auparavant un simple élément affichable par \textit{JavaFX} en boite de dialogue de \textit{ControlsFX}. Elle était dorénavant mieux intégrée stylistiquement à l'interface de l'application, et surtout, elle enlevait le \textit{listener} du tableau, et donnait à la logique de génération de tableau sa propre classe : une Action. Bien plus propre.
 
@@ -50,7 +50,7 @@ Aujourd'hui cette Action est toujours une classe gigogne du \textit{ColumnSelect
 Il ne restait alors plus qu'une seule tâche avant que l'implémentation du cas d'utilisation soit terminée : La conversion du graphique en un fichier SVG.
 
 \begin{center}
-Le SVG est un format graphique vectoriel. Un fichier au format SVG contient la définitions de diverses formes. Ces défintions comportent entre autres la positions de la position de la forme, la couleur de son tracé et de son remplissage, la largeur de son tracé \ldots.
+Le SVG est un format graphique vectoriel. Un fichier au format SVG contient la définition de diverses formes. Ces définitions comportent entre autres la position de la position de la forme, la couleur de son tracé et de son remplissage, la largeur de son tracé \ldots.
 \end{center}
 
 \begin{center}
@@ -61,14 +61,14 @@ Un nœud (\textit{Node}) dans \textit{JavaFX} est la classe de base de n'importe
 Une scène (\textit{Scene}) est un ensemble de nœuds.
 \end{center}
 
-J'ai repris en charge l'écriture d'un convertisseur que John avait commencé à écrire. Ce convertisseur est conçu pour pouvoir transformer n'importe quel nœud en SVG. Pour cela il parcours tous les nœuds composés récursivement\footnote{La récursivité est un concept de l'informatique qui désigne la répétition d'une action entrainée par cette même action. Ici, l'action serait ``Parcourir les enfants''. Quand je \emph{parcours les enfants}, si je trouve un enfants qui en a d'autres, je \emph{parcours ses enfants}.}, et converti les nœuds de bases en éléments SVG. Nous nous en servons sur le nœud du graphique.
+J'ai repris en charge l'écriture d'un convertisseur que John avait commencé à écrire. Ce convertisseur est conçu pour pouvoir transformer n'importe quel nœud en SVG. Pour cela il parcours tous les nœuds composés récursivement\footnote{La récursivité est un concept de l'informatique qui désigne la répétition d'une action entrainée par cette même action. Ici, l'action serait ``Parcourir les enfants''. Quand je \emph{parcours les enfants}, si je trouve un enfant qui en a d'autres, je \emph{parcours ses enfants}.}, et converti les nœuds de bases en éléments SVG. Nous nous en servons sur le nœud du graphique.
 
 Avant que je travail dessus, voici comme le graphiques étaient rendus :
 %----------------Image du rendu avant--------------
 
 Le travail que j'ai du effectuer pour ce convertisseur est principalement un travail d'investigation. Il fallait que je trouve où et comment JavaFX définit les options graphiques des nœuds qu'il utilise au moment de rendre les nœuds 
 
-Pour cela, j'ai tout d'abord regardé comment le noeud du graphique était composé. J'ai extrait la hierarchie des enfants du nœud du graphique :
+Pour cela, j'ai tout d'abord regardé comment le nœud du graphique était composé. J'ai extrait la hiérarchie des enfants du nœud du graphique :
 
 \begin{verbatim}
 ConcordiaChart@b721ec6[styleClass=chart]
@@ -150,7 +150,7 @@ J'ai cherché à savoir, en comparant avec les éléments du SVG déjà génèr�
 \end{itemize}
 %Image du graphique sous JavaFX
 
-J'ai ensuite été chercher dans le moteur de rendu de \textit{JavaFX} la logique qui rend une scene à l'écran. Mon plan (diabolique s'il en est), était de voir où cette logique récupère les options graphiques des objets qu'elle doit dessiner. Si mon plan a failli, me coutant quelques jours, j'ai néanmoins appris énormément sur la façon dont \textit{JavaFX} fonctionne. 
+J'ai ensuite été chercher dans le moteur de rendu de \textit{JavaFX} la logique qui rend une scène à l'écran. Mon plan (diabolique s'il en est), était de voir où cette logique récupère les options graphiques des objets qu'elle doit dessiner. Si mon plan a failli, me coutant quelques jours, j'ai néanmoins appris énormément sur la façon dont \textit{JavaFX} fonctionne. 
 
 Pour résumer, le code de JavaFX est separé en deux :
 \begin{enumerate}
@@ -165,18 +165,18 @@ Pour résumer, le code de JavaFX est separé en deux :
   \end{enumerate}
 \end{enumerate}
 
-Après la faillite de mon premier plan, j'ai procédé plus simplement. Je suis revenu aux objets de l'API publique, ceux que nous manipulons quand nous créons une scène et ait cherché les différentes options graphique en leur sein. J'ai reussi à trouver et à orienter correctement le nom des axes et à repositionner ceux-ci, j'ai re-aligné les graduations, repositionné et affiché des lignes et des textes dans le graph.
+Après la faillite de mon premier plan, j'ai procédé plus simplement. Je suis revenu aux objets de l'API publique, ceux que nous manipulons quand nous créons une scène et ait cherché les différentes options graphique en leur sein. J'ai réussi à trouver et à orienter correctement le nom des axes et à repositionner ceux-ci, j'ai réaligné les graduations, repositionné et affiché des lignes et des textes dans le graph.
 
 %
 %
 %
-\section{Réponse aux attente de la communauté GitHub}
-Le module SVG était fini. Le cas d'utilisation était implémenté. Nous étions près à montrer le fruit de notre travail aux chercheurs Australiens, ce que nous avons fait le Jeudi% verifier que c'est  bien un jeudi 
+\section{Réponse aux attentes de la communauté GitHub}
+Le module SVG était fini. Le cas d'utilisation était implémenté. Nous étions près à montrer le fruit de notre travail aux chercheurs Australiens, ce que nous avons fait le Jeudi% vérifier que c'est  bien un jeudi 
 21 mai par visioconférence. Ils étaient enchantés du prototype.
 
 Le docteur Bowring a envoyé un lien vers le dépot GitHub du projet, et une petite mais active communauté s'est formée autour du projet. Ses membres nous envoient encore à ce jours des rapports de bug, des suggestions de fonctions.
 
-Cela a bien sur beaucoup changer la dynamique de travail. Nos journées étaient à présent partagées entre réponses à la communauté, corrections rapides de bugs et developpement de fonctions plus complexes. Nous avons appris à penser à court et long termes.
+Cela a bien sur beaucoup changé la dynamique de travail. Nos journées étaient à présent partagées entre réponses à la communauté, corrections rapides de bugs et développement de fonctions plus complexes. Nous avons appris à penser à court et long termes.
 
 Je vais à présent parler des deux dernières fonctions complexes que j'ai conçu et codé les semaines restantes.
 
@@ -185,7 +185,7 @@ Je vais à présent parler des deux dernières fonctions complexes que j'ai con�
 \subsection{Ré-écriture de l'interface graphique avec \textit{FXML}}
 Une fois le rush du prototype terminé, John s'est penché sur la documentation d'une fonction de \textit{JavaFX} qui avait attiré son attention un peu plus tôt. Il a lu ce qu'était \textit{FXML}, m'en a parlé et nous avons décidé qu'il serait de bon ton, pour le long terme, de ré-écrire les interfaces graphiques du programme avec. Nous nous sommes donc attelé à la tâche.
 
-Le FXML est un langage basé sur la syntaxe XML\footnote{Le XML est une syntaxe standardisée permetant de représenter n'importe quelle données composées de caracteres normaux. De nombreux langages sont basés sur XML car la logique de décodage de la syntaxe est présente dans de nombreux langages. Quand ils écrivent un décodeurs pour leur données, les developpeurs ont juste besoin de se soucier de la grammaire et du vocabulaire, pas de la syntaxe.}. Il permet de représenter simplement les interfaces graphique d'un programme. Ainsi, il y a une meilleurs séparation du code : la structures des interfaces ont leur fichiers en \textit{FXML}, et leur comportement est codé en \textit{Java}.
+Le FXML est un langage basé sur la syntaxe XML\footnote{Le XML est une syntaxe standardisée permettant de représenter n'importe quelles données composées de caractères normaux. De nombreux langages sont basés sur XML car la logique de décodage de la syntaxe est présente dans de nombreux langages. Quand ils écrivent un décodeur pour leurs données, les développeurs ont juste besoin de se soucier de la grammaire et du vocabulaire, pas de la syntaxe.}. Il permet de représenter simplement les interfaces graphiques d'un programme. Ainsi, il y a une meilleure séparation du code : la structure des interfaces ont leur fichiers en \textit{FXML}, et leur comportement est codé en \textit{Java}.
 
 Je vais vous expliquer ce que j'ai fais pour chaque fichier avec un exemple simple.
 \begin{verbatim}
@@ -225,7 +225,7 @@ getChildren().add(label);
 \end{verbatim}
 Ici, le label et le bouton sont ajoutés comme enfants de la classe.
 
-Quand on transforme une classe dans l'optique qu'elle utilise \textit{FXML}, on enlève toutes ses partie de présentation et on les insere dans un fichier écrit avec FXML.
+Quand on transforme une classe dans l'optique qu'elle utilise \textit{FXML}, on enlève toutes ses partie de présentation et on les insère dans un fichier écrit avec FXML.
 \begin{verbatim}
 <? xml version="1.0" encoding="UTF-8" ?>
 
@@ -282,22 +282,22 @@ Ceci est le constructeur de la classe. Il ne fait que construire les objets indi
 \begin{verbatim}
 @FXML Label label;
 \end{verbatim}
-... car certaines des méthodes de comportement ont besoin d'y accèder. La méthode \textit{changerBrother} accède par exemple à la variable \textit{label}.
+... car certaines des méthodes de comportement ont besoin d'y accéder. La méthode \textit{changerBrother} accède par exemple à la variable \textit{label}.
 
 Il reste une dernière question. Comment l'interface graphique généré depuis le \textit{FXML} est liée au comportement ? Très simplement : dans le fichier \textit{FXML}, le bouton est lié par l'attribut \textit{onAction} à la méthode \textit{changerBrother}.
 
-Cela peut sembler beaucoup de travail pour le même résultat en retour mais cette séparation entre la présentation et le comportement nous a fait gagné énormement de place et de clareté dans notre code.
+Cela peut sembler beaucoup de travail pour le même résultat en retour mais cette séparation entre la présentation et le comportement nous a fait gagné énormément de place et de clarté dans notre code.
 
 Pendant que je refactorisais ces classes, je me suis aussi occupé de rendre le graphique personnalisable.
 
 \subsection{Personnalisation du graphique}
-Très tôt dans la seconde partie du projet, nous nous sommes aperçu de la necessité de personnaliser le graphique. Si \textit{Topsoil} est un outil de visualisation, c'est aussi un outil de génération de graphiques pour le partage et la publication. Dans cette optique, nous voulions donner la possibilité aux géochronologistes de créer un schema dans le même style que leur publications.
+Très tôt dans la seconde partie du projet, nous nous sommes aperçus de la nécessité de personnaliser le graphique. Si \textit{Topsoil} est un outil de visualisation, c'est aussi un outil de génération de graphiques pour le partage et la publication. Dans cette optique, nous voulions donner la possibilité aux géochronologistes de créer un schéma dans le même style que leurs publications.
 
-Les panneaux que j'ai conçu dans cette optique et que je vais vous présenter à présent dans leur version finale ont connues plusieurs formes. Les besoins auxquels répondait leur forme première m'avaient été donné par le Docteur Bowring. D'autres fonctionnalités, comme la personnalisation des limites du schema ou encore le renommage des axes nous ont ensuites été demandé par des utilisateurs via \textit{GitHub}.
+Les panneaux que j'ai conçu dans cette optique et que je vais vous présenter à présent dans leur version finale ont connues plusieurs formes. Les besoins auxquels répondait leur forme première m'avaient été donné par le Docteur Bowring. D'autres fonctionnalités, comme la personnalisation des limites du schéma ou encore le "renommage" des axes nous ont ensuite été demandé par des utilisateurs via \textit{GitHub}.
 
 %INSERER UNE IMAGE POUR DU PANNEAU
 
-Il y a deux panneaux concentré en un. Celui pour configurer \emph{le style des éllipses} et le second qui permet de configurer \emph{le style du graphique}. Cette séparation est due au fait que dans le futur, il sera possible d'inserer plusieurs séries d'éllipses, et on pourra déterminer le style pour chacune d'entre elles. Il sera alors possible de multiplier aisement le premier panneau.
+Il y a deux panneaux concentrés en un. Celui pour configurer \emph{le style des éllipses} et le second qui permet de configurer \emph{le style du graphique}. Cette séparation est dûe au fait que dans le futur, il sera possible d'insérer plusieurs séries d'éllipses, et on pourra déterminer le style pour chacune d'entre elles. Il sera alors possible de multiplier aisement le premier panneau.
 
 Ce premier panneau permet de modifier l'opacité et les couleurs du fond et des contours des ellipses. Cela permet de faire des choses aussi variées que ceci.
 
@@ -308,14 +308,13 @@ Le deuxième panneau permet quand à lui de choisir le type de lignes Concordia 
 \item Le texte de sa légende
 \item Ses limites
 \item La distances qui sépare ses grandes graduations
-\item La valeur à partir de laquelle le placement de ces grandes graduation sont calculés
-\item Le nombre de petites graduation entre les grandes graduations
+\item La valeur à partir de laquelle le placement de ces grandes graduations sont calculées
+\item Le nombre de petites graduations entre les grandes graduations
 \end{itemize}
 
-Le developpement de ces panneaux a été rendu facile par le système de \textit{Property} de JavaFX. Une \textit{Property} est la réponse de \textit{Oracle} dans \textit{JavaFX} à un problème qui faisait perdre beaucoup de temps au developpeurs. Avant quand on voulait que la valeure d'une variable soit modifiée quand une autre était changée, il fallait écrire une logique déclanchée à chaques modifications qui repercutait les changements sur la deuxième variable. Ce n'est déjà pas simple car il faut repèrer tous les endroits où un changement est effectué et lancer cette logique. Maintenant, imaginez le casse-tête que serait de lier les variables dans les deux sens. JavaFX simplifie ce problème en encapsulant la variable dans une \textit{Property}. On interagit plus directement avec la variable mais avec son conteneur. Il peut donc exectuer lui même la logique de modification. Mais il y a mieux. Dans le cas où l'on veut simplement que les valeurs de deux property soient repercutés l'ue sur l'autre, alors on peut simplement dire à \textit{JavaFX} de les lier. Tout bonnement merveilleux.
+Le développement de ces panneaux a été rendu facile par le système de \textit{Property} de JavaFX. Une \textit{Property} est la réponse de \textit{Oracle} dans \textit{JavaFX} à un problème qui faisait perdre beaucoup de temps aux développeurs. Avant, quand on voulait que la valeur d'une variable soit modifiée quand une autre était changée, il fallait écrire une logique déclanchée à chaque modification qui repercutait les changements sur la deuxième variable. Ce n'est déjà pas simple car il faut repérer tous les endroits où un changement est effectué et lancer cette logique. Maintenant, imaginez le casse-tête que serait de lier les variables dans les deux sens. JavaFX simplifie ce problème en encapsulant la variable dans une \textit{Property}. On interagit plus directement avec la variable mais avec son conteneur. Il peut donc executer lui même la logique de modification. Mais il y a mieux. Dans le cas où l'on veut simplement que les valeurs de deux property soient repercutées l'une sur l'autre, alors on peut simplement dire à \textit{JavaFX} de les lier. Tout bonnement merveilleux.
 
-Les \textit{Property} sont utilisées partout dans JavaFX. N'importe quelle valeur, de la couleur d'une bordure à la largeur d'une fenêtre en est une. Tout ce que j'ai eu à faire est simplement lier les valeurs de mes formulaires aux propriétés auquelles elles étaient liées. 
+Les \textit{Property} sont utilisées partout dans JavaFX. N'importe quelle valeur, de la couleur d'une bordure à la largeur d'une fenêtre en est une. Tout ce que j'ai eu à faire est simplement lier les valeurs de mes formulaires aux propriétés auxquelles elles étaient liées. 
 
-Fait qui se révèlera par la suite interessant à propos de ces propriétés cibles : dans notre programme nous savons où les trouver. Par exemple, le nom de l'axe se trouve dans la classe de l'axe. Mais notre programme est aussi une librairie integrable dans un programme plus grand. Et j'ai pensé que dans ces programmes les propriétés à paramètrées seraient a un endroit inconnu. J'avais donc conçu une interface que les panels utilisaient pour trouver les propriétés au lieu d'y acceder directement. Cette interface a été jugée trop peu utile et j'ai du la retirer.
-
+Fait qui se révèlera par la suite intéressant à propos de ces propriétés cibles : dans notre programme nous savons où les trouver. Par exemple, le nom de l'axe se trouve dans la classe de l'axe. Mais notre programme est aussi une librairie intégrable dans un programme plus grand. Et j'ai pensé que dans ces programmes les propriétés à paramétrer seraient à un endroit inconnu. J'avais donc conçu une interface que les panels utilisaient pour trouver les propriétés au lieu d'y accéder directement. Cette interface a été jugée trop peu utile et j'ai du la retirer.
 %%PARLER DU RÉSUMÉ DU LIVRE
